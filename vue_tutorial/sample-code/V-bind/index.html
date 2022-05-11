@@ -9,7 +9,11 @@
 </head>
 <body>
    
-
+    <div id = "app">
+        <!-- Valueの前にv-bind:を付け、valueの中身はパラメータ名を指定 -->
+        <input type="text" v-bind:value="message">
+        <p>{{message}}</p>
+    </div>
 
     <script src="https://unpkg.com/vue@3.1.5"></script>
     <script src ="js/main.js"></script>

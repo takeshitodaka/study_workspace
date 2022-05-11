@@ -9,7 +9,10 @@
 </head>
 <body>
    
-
+    <div id = "app">
+        <!-- pタグに直接v-ifで条件を指定 -->
+        <p v-if="toggle">{{message}}</p>
+    </div>
 
     <script src="https://unpkg.com/vue@3.1.5"></script>
     <script src ="js/main.js"></script>

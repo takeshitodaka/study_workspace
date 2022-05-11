@@ -15,8 +15,16 @@ const app  = Vue.createApp({
         //argument
         colors: ['Red', 'Green', 'Blue'],
         //boolean
-        toggle: false
+        toggle: false,
+        //time
+        now: '-'
 
-    })
+    }),
+    methods: {
+        onClick: function(){
+            // console.log('onClick!')
+            this.now = new Date().toLocaleString()
+        }
+    }
 })
 app.mount('#app')

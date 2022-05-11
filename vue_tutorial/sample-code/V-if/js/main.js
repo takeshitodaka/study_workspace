@@ -1,7 +1,7 @@
 console.log("this app created with Vue.js version " + Vue.version)
 const app  = Vue.createApp({
     data: () => ({
-        //parameters
+        //Properties
         //str
         message : "String Property",
         //int
@@ -15,7 +15,7 @@ const app  = Vue.createApp({
         //argument
         colors: ['Red', 'Green', 'Blue'],
         //boolean
-        toggle: false
+        toggle: true
 
     })
 })

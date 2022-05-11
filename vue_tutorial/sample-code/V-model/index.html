@@ -10,8 +10,10 @@
 <body>
    
     <div id = "app">
-        <p>{{message}}</p>
-        
+        <!-- Valueの前にv-bind:を付け、valueの中身はパラメータ名を指定 -->
+        <p><input type="text" v-model="message"></p>
+        <p><input type="text" v-model="message"></p>
+        <pre>{{$data}}</pre>
     </div>
 
     <script src="https://unpkg.com/vue@3.1.5"></script>
