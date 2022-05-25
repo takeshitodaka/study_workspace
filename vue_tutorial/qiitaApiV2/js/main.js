@@ -3,7 +3,7 @@ const app  = Vue.createApp({
         //parameters
         items: null,
         keyword: '',
-        message: ''
+        message: 'hageのhageによるhageのための検索サイト'
     }),
     watch : {
         keyword: function(newKeyword, oldKeyword){
