@@ -1,9 +1,0 @@
-#app ul{
-    /* リストの中黒点を消す */
-    list-style: none;
-}
-
-#app li > span.done{
-    /* liタグ内のspanタグにあるdoneクラスがtrueの時取り消し線を表示 */
-    text-decoration: line-through
-}
