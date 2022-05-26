@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+   
+    <div id = "app">
+        
+            <p v-if="color === 'red'">
+                <!-- v-if,v-else-if, v-elseはコンテンツそのものの実装を切り替えるので初期描写の負荷は低いが
+                切り替え時の負荷は高いよ -->
+                Stop
+            </p>
+
+            <p v-else-if="color === 'yellow'">
+                Caution
+            </p>
+
+            <p v-else-if="color === 'blue'">
+                Go
+            </p>
+
+            <p v-else>
+                Not red/yellow/blue
+            </p>
+    </div>
+
+    <script src="https://unpkg.com/vue@3.1.5"></script>
+    <script src ="js/main.js"></script>
+</body>
+
+
+</html>

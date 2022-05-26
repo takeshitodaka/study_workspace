@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+   
+    <div id = "app">
+        <!--
+            コンテンツタグの中にv-forパラメータを付ける
+            (x, y) in z のx,yに代入先変数名、zにはオブジェクトパラメータ名、
+            マスタッシュ構文には出力する変数名 
+            （第一引数のxにはパラメータの値、第二引数のyにはパラメータ名が入る）
+        -->
+        <ul>
+            <!-- <li v-for="value in user">{{ value }}</li> -->
+            <li v-for="(value, key) in user">{{ key }} : {{ value }}</li>
+        </ul>
+    </div>
+
+    <script src="https://unpkg.com/vue@3.1.5"></script>
+    <script src ="js/main.js"></script>
+</body>
+
+
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+   
+    <div id = "app">
+        
+        <p>
+            {{ counter }} <br>
+            
+            {{ message }}
+        </p>
+        <!-- メソッドで処理を書いてる場合、こっちのほうが色々書けるよね -->
+        <button v-on:click = "clickHandler($event, 'messageです')" id = "btn">method!</button>
+    </div>
+
+    <script src="https://unpkg.com/vue@3.1.5"></script>
+    <script src ="js/main.js"></script>
+</body>
+
+
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+   
+    <div id = "app">
+        <label for="red">Red</label>
+        <input type="checkbox" id = "red" v-model="checkedColors" value="Red" >
+        <label for="green">Green</label>
+        <input type="checkbox" id = "green" v-model="checkedColors" value="Green" >
+        <label for="blue">Blue</label>
+        <input type="checkbox" id = "blue" v-model="checkedColors" value="Blue" >
+
+        <p>{{ checkedColors }}</p>
+        
+        
+        <pre>{{ $data }}</pre>
+    </div>
+
+    <script src="https://unpkg.com/vue@3.1.5"></script>
+    <script src ="js/main.js"></script>
+</body>
+
+
+</html>
