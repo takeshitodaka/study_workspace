@@ -8,11 +8,23 @@
     <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
-   
+   <div class="controls">
+    <label for="animations">choose Animation:</label>
+    <select name="animations" id="animations">
+        <option value="walk">walk</option>
+        <option value="run">run</option>
+    </select>
+    <br>
+    <label for="speed">choose Animationspeed:</label>
+    <select name="speed" id="speed">
+        <option value="10">Slow</option>
+        <option value="5">Medium</option>
+        <option value="1">Fast</option>
+    </select>
+   </div>
 
-
-    <script src="https://unpkg.com/vue@3.1.5"></script>
-    <script src ="js/test.js"></script>
+    <canvas id="canvas1"></canvas>
+    <script src ="./js/script.js"></script>
 </body>
 
 
