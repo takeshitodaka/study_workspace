@@ -1,5 +1,5 @@
 let counter = 0
-let dom  = document.querySelector('#root')
+let dom  = document.querySelector('#root2')
 doCount()
 function doCount(){
     counter++;

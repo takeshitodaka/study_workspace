@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <Script src="https://unpkg.com/react@17/umd/react.development.js"></Script>
     <Script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></Script>
+    <Script src="https://unpkg.com/@babel/standalone/babel.min.js"></Script>
     <link rel="stylesheet" href="./style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
@@ -21,8 +22,85 @@
         <div class="bg-secondary text-white">secondary</div>
         <div class="bg-success text-dark">primary</div>
         <div class="bg-warning text-dark">primary</div> -->
-        <!-- <div id="root" onclick="doCount()">wait...</div> -->
+        <div id="root">did not read JS on html</div>
+        <div id="root2" onclick="doCount()">did not read script.js</div>
     </div>
-    <Script src="./script.js"></Script>
+    <script type="text/babel">
+        const content_true = `true message`
+        const content_false = `false message`
+
+        const data_list=[
+            <li className="list-group-item">One</li>,
+            <li className="list-group-item">Two</li>,
+            <li className="list-group-item">Three</li>
+        ]
+        const table_records = [
+            {name:'Yamada', mail:'yamada@test.com', age:40},
+            {name:'Tanaka', mail:'tanaka@test.com', age:20},
+            {name:'Nakamura', mail:'nakamura@test.com', age:30},
+            {name:'Yamamoto', mail:'yamamoto@test.com', age:55},
+        ]
+
+        let dom = document.querySelector('#root');
+        let variable = "test var"
+
+        const msg_style = {
+            fontSize: "20px",
+            color: "red",
+            border: "1px solid blue"
+        }
+        let printMsg = (msg,size,color)=>{
+            const style ={
+                fontSize: size + "pt",
+                fontWeight: '700',
+                color: color,
+                border: "1px solid " + color
+            }
+            return <p style={style}>{msg}</p>
+
+        }
+        let flag = true
+        let el = (
+            <div className="alert alert-primary">
+                <h1>{variable}</h1>
+                <h2>JSX sample</h2>
+                <p style = {msg_style}>This is sample message from JS on html.</p>
+                <div className="alert alert-secpmdary mt-3">
+                    {printMsg('最初のメッセージ', 36, '#fff')}
+                    {printMsg('次のメッセージ', 24, '#aaa')}
+                    {printMsg('最後のメッセージ', 12, '#666')}
+                </div>
+                {flag ?
+                    <p>{content_true}</p>
+                    :
+                    <p>{content_false}</p>
+                    
+                }
+                <div>
+                    <ul>
+                        {data_list}
+                    </ul>
+                </div>
+                <table className="table table-striped mt-4">
+                    <thead className="thead-dark">
+                        <th>name</th>
+                        <th>mail</th>
+                        <th>age</th>
+                    </thead>
+                    <tbody>
+                        {table_records.map((value)=>(
+                            <tr>
+                                <td>{value.name}</td>
+                                <td>{value.mail}</td>
+                                <td>{value.age}</td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
+        )
+        ReactDOM.render(el,dom);
+    </script>
+    <!-- <Script src="./script.js"></Script> -->
 </body>
 </html>
