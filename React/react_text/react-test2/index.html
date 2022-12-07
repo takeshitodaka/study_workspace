@@ -24,6 +24,8 @@
         <div class="bg-warning text-dark">primary</div> -->
         <div id="root">did not read JS on html</div>
         <div id="root2" onclick="doCount()">did not read script.js</div>
+        <div id="root3">counter</div>
+        <div id="root4">Form</div>
     </div>
     <script type="text/babel">
         const content_true = `true message`
@@ -41,7 +43,7 @@
             {name:'Yamamoto', mail:'yamamoto@test.com', age:55},
         ]
 
-        let dom = document.querySelector('#root');
+        let dom 
         let variable = "test var"
 
         const msg_style = {
@@ -49,6 +51,29 @@
             color: "red",
             border: "1px solid blue"
         }
+
+        // if文のテスト
+        let message = "if文のテスト"
+        const trueMessage =`これはtrueの時に表示されるメッセージ
+        ちゃんと表示されてるか？`
+        const falseMessage =`これはfalseの時に表示されるメッセージ
+        ちゃんと表示されてるか？`
+        let flg=false
+
+        // 配列のテスト
+        let listData=[
+            <li className="list-group-item">ONE</li>,
+            <li className="list-group-item">TWO</li>,
+            <li className="list-group-item">THREE</li>
+        ]
+
+        // mapの場合
+        let mapData=[{name:'Taro', mail:'taro@yamada.com', age:45},
+        {name:'Hanako', mail:'hanako@flower.com', age:37},
+        {name:'Sachiko', mail:'sachiko@happy.com', age:29},
+        {name:'Jiro', mail:'jiro@change.com', age:18},
+        {name:'Kumi', mail:'kumi@class.com', age:56},
+    ]
         let printMsg = (msg,size,color)=>{
             const style ={
                 fontSize: size + "pt",
@@ -60,6 +85,21 @@
 
         }
         let flag = true
+
+
+        // arrowfunction
+        let objectData={
+            url:'https://google.com',
+            title:'Google',
+            caption:'※これはGoogleのサイトです。'
+        }
+
+        // タイマーを使う
+        let counter = 0
+        
+        setInterval(()=>{
+            dom = document.querySelector('#root');
+            counter++
         let el = (
             <div className="alert alert-primary">
                 <h1>{variable}</h1>
@@ -82,7 +122,7 @@
                     </ul>
                 </div>
                 <table className="table table-striped mt-4">
-                    <thead className="thead-dark">
+                    <thead className="table-dark">
                         <th>name</th>
                         <th>mail</th>
                         <th>age</th>
@@ -97,9 +137,108 @@
                         ))}
                     </tbody>
                 </table>
+                <div>
+                    <h6>{message}</h6>
+                     trueのみの場合 <br />
+                    {flg &&
+                        <div className="alert alert-primary mt-3">
+                            <p>{trueMessage}</p>
+                        </div>
+                    }
+                    分岐
+                    {flg ?
+                        <div className="alert alert-primary mt-3">
+                            <p>{trueMessage}</p>
+                        </div>
+                        :
+                        <div className="alert alert-primary mt-3">
+                            <p>{falseMessage}</p>
+                        </div>
+
+                    }
+                    <div>
+                        {listData}
+                    </div>
+                    map
+                    {mapData.map((value)=>(
+                        <tr>
+                            <td>{value.name}</td>    
+                            <td>{value.mail}</td>    
+                            <td>{value.age}</td>    
+                        </tr>
+                    ))}
+                </div>
+                <div>
+                    <h6>アロー関数活用</h6>
+                    {(()=>
+                        <div className="card mt-4">
+                            <div className="card-header">
+                                {objectData.title}    
+                            </div>
+                            <div className="card-body">
+                                {objectData.caption}
+                            </div>
+                            <div className="card-footer">
+                                <a href={objectData.url}>※{objectData.title}に移動</a>
+                            </div>
+                        </div>
+                        
+                        )()}
+                </div>
+                <h4>TimerTest</h4>
+                <h5 className="alert alert-primary">
+                    count:{counter}    
+                </h5>
             </div>
         )
         ReactDOM.render(el,dom);
+    },1000)
+    
+    // onclickイベントを使う
+    let cliCounter=0
+    let doAction=(event)=>{
+        dom = document.querySelector('#root3');
+        cliCounter++
+        let cliEl=(
+            <div>
+                <h5 className="alert alert-primary" onClick={doAction}>
+                    count:{cliCounter}
+                </h5>    
+            </div>
+        )
+        ReactDOM.render(cliEl,dom)
+    }
+    doAction()
+    
+    //form
+    let in_val =''
+    let formMessage = "お名前をどうぞ"
+    let doChange = (e)=>{
+        in_val=e.target.value
+        formMessage='こんにちは'+ in_val+'さん!!'
+
+    }
+    let doActionForm = (e)=>{
+        dom = document.querySelector('#root4')
+        let formEl = (
+            <div>
+                <h6>{formMessage}</h6>
+                <div className="alert alert-primary">
+                    <div className="form-group">
+                        <label>Input:</label>
+                        <input type="text" className="form-control"
+                        id="inputText" onChange={doChange} />
+                        
+                    </div>
+                        <button onClick={doActionForm} className="btn btn-primary">
+                            Click    
+                        </button>
+                </div>
+            </div>
+        )
+        ReactDOM.render(formEl,dom)
+    }
+    doActionForm()
     </script>
     <!-- <Script src="./script.js"></Script> -->
 </body>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <Script src="https://unpkg.com/react@17/umd/react.development.js"></Script>
+    <Script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></Script>
+    <Script src="https://unpkg.com/@babel/standalone/babel.min.js"></Script>
+    <link rel="stylesheet" href="./style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <title>Document</title>
+</head>
+<body>
+    <h1 class="bg-primary text-white display-4">React</h1>
+    <div class="container mt-3">
+
+        <div id="root">did not read JS on html</div>
+       
+    </div>
+    <script type="text/babel">
+        let dom = document.querySelector('#root')
+        let message="React Component page."
+        
+        // function component
+
+        function Welcome(props){
+            return <div className={props.welcomeClass}>
+                <p className={props.fontSize}>Hello {props.name}!!</p>
+                <Calc classes={props.classes} number={props.number} />    
+            </div>
+        }
+
+        function Calc(props){
+            let total = 0
+            for(let i=1;i<=props.number;i++){
+                total+=i    
+            }
+            return <p className={props.classes}>
+                1から{props.number}までの
+                合計は、「{total}」です。</p>
+        }
+        // JSX to display
+        let el  =(
+            <div>
+                <h5 className="mb-4">{message}</h5>
+                <Welcome name="Taro" fontSize="h2" welcomeClass="alert alert-primary" 
+                classes="h3" number="10"/>
+                <Welcome name="Hanako" fontSize="h5" welcomeClass="alert alert-dark" 
+                classes="h5" number="100"/>
+                <Calc classes="h4" number="50" />
+                <Calc classes="h6" number="500" />
+            </div>
+        )
+
+        ReactDOM.render(el,dom)
+    </script>
+    <!-- <Script src="./script.js"></Script> -->
+</body>
+</html>
