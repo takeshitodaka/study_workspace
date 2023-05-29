@@ -1,0 +1,114 @@
+環境構築
+    ・rubyインストール
+        windowsなので公式サイトからインストーラをDLしてダイアログに沿ってインストール
+        https://rubyinstaller.org/downloads/
+
+        ※確認コマンド ruby -v(取り合えず最新版を入れる現行最新は3.2.2) 
+
+        ※MSYS2とMinGWについて
+        Windows環境で開発を行う場合、コンパイル操作等をUNIX同様のコマンドで実行できるようにするためのパッケージ
+
+
+    ・railsのインストール
+        こちらもとりあえず最新版入れる（現行最新版は7.0.5）
+        gem install rails
+
+    ・サンプルでTodoアプリを作るのに必要なGemを入れる
+        1. Gemファイル編集
+        導入パッケージ
+        ・spec-rails：テスティングフレームワーク
+        ・faker：テストデータの作成
+        ・factory_girl_rails：テストデータの作成補助
+        ・shoulda_matchers：テストのコーディング補助
+        ・database_cleaner：データベースの掃除屋さん
+
+        Gemファイル追記内容
+
+            # devとtest環境でのみ使用
+            group :development, :test do
+            gem 'rspec-rails', '~> 3.5'
+            end
+
+            # test環境でのみ使用
+            group :test do
+            gem 'factory_girl_rails', '~> 4.0'
+            gem 'shoulda-matchers', '~> 3.1'
+            gem 'faker'
+            gem 'database_cleaner'
+            end
+
+        2. 追記したパッケージのインストール
+            bundle install
+
+    ・テストツールRSpecの設定
+
+    1.初期設定
+        rails generate rspec:install
+
+    2.テストデータ作成補助のパッケージfactory girl用のディレクトリ作成
+        mkdir spec/factories
+        ※手順1のrspec初期設定で自動的にspecディレクトリが生成されるのでその配下に作成
+    
+    3.RSpec用の設定ファイル編集
+        spec/rails_helper.rbに以下を追記（テスト内容によって編集？）
+
+            # require database cleaner at the top level
+            require 'database_cleaner'
+
+            # [...]
+            # configure shoulda matchers to use rspec as the test framework and full matcher libraries for rails
+            Shoulda::Matchers.configure do |config|
+            config.integrate do |with|
+                with.test_framework :rspec
+                with.library :rails
+            end
+            end
+
+            # [...]
+            RSpec.configure do |config|
+            # [...]
+            # add `FactoryGirl` methods
+            config.include FactoryGirl::Syntax::Methods
+
+            # start by truncating all the tables but then use the faster transaction strategy the rest of the time.
+            config.before(:suite) do
+                DatabaseCleaner.clean_with(:truncation)
+                DatabaseCleaner.strategy = :transaction
+            end
+
+            # start the transaction strategy as examples are run
+            config.around(:each) do |example|
+                DatabaseCleaner.cleaning do
+                example.run
+                end
+            end
+            # [...]
+            end
+
+
+開発
+    ・モデルの定義
+        プロジェクトのルートでコマンド実行するとdb/model配下にモデル定義ファイルが生成される。便利。
+        1Todoに対し複数のItemが紐づくデータ構造
+
+        rails g model Todo title:string created_by:string
+        rails g model Item name:string done:boolean todo:references
+
+        /spec/models内に各モデルのテスト内容を記載
+        記載内容は各ファイル参照
+
+    ・モデルの詳細編集
+        /app/models内の各モデルのrbファイルにモデルの詳細を追記
+        追記内容は各ファイルを参照。モデルの紐づけやらvalidationやら
+
+    ・コントローラの作成
+        エンドポイントの定義。rails機能でベースとなるファイルを生成
+        ※モデル毎にコントローラがapp/controllers配下に生成される
+        rails g controller Todos && rails g controller Items
+
+    ・コントローラ（APIを叩いた時の挙動）用のテストコードを作成
+        まずはコードを書き込むファイルを作成
+        mkdir spec/requests && touch spec/requests/todos_spec.rb
+
+        まだ途中だけど必要な情報揃ったのでとりあえず案件優先、余裕が出来たら続きやる
+        https://qiita.com/yyh-gl/items/30bd91c2b33fdfbe49b5
